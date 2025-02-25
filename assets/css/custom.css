@@ -1,0 +1,11 @@
+/* Custom styles for larger modal */
+.modal-dialog.large-modal {
+    max-width: 5000%;
+}
+
+/* Ensure the checkbox fits inside the column */
+.table .form-check-input {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}

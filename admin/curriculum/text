@@ -1,0 +1,209 @@
+<?php
+require_once('../../config.php');
+if(isset($_GET['id'])){
+    $course_id = $_GET['id'];
+    $qry = $conn->query("SELECT `po_code` FROM `program_outcomes` WHERE `course_id` = '{$course_id}'");
+    $program_outcomes = [];
+    while($row = $qry->fetch_assoc()){
+        $program_outcomes[] = $row;
+    }
+    $program_outcome_ids = array_column($program_outcomes, 'po_code');
+}
+?>
+<style>
+img#cimg{
+    height: 17vh;
+    width: 25vw;
+    object-fit: scale-down;
+}
+.tab-content {
+    overflow-y: auto;
+    max-height: 400px;
+}
+.table-responsive {
+    width: 100%;
+    margin-bottom: 15px;
+    overflow-y: hidden;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    border: 1px solid #ddd;
+}
+.table-responsive .table {
+    margin-bottom: 0;
+}
+#uni_modal .modal-dialog {
+    max-width: 50%; /* Increased modal width */
+    width: auto;
+    max-height: auto; /* Adjusted maximum height */
+}
+#uni_modal .modal-dialog.large-modal {
+    max-width: 70%; /* Larger modal width for Program Outcomes */
+}
+.action-button-container {
+    display: flex;
+    justify-content: center;
+}
+.add-outcome-button {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.auto-height {
+    height: auto;
+}
+</style>
+<div class="container-fluid">
+    <form action="" id="programOutcomesForm">
+        <input type="hidden" name="course_id" value="<?php echo isset($course_id) ? $course_id : '' ?>">
+        <div class="form-group">
+            <label for="program_id" class="control-label">Program</label>
+            <select name="program_id" id="program_id" class="form-control form-control-sm select2" required>
+                <option value="">Select Program</option>
+                <?php 
+                $programs = $conn->query("SELECT * FROM `program_list` ORDER BY `name` ASC");
+                while($row = $programs->fetch_assoc()):
+                ?>
+                <option value="<?= $row['id'] ?>" <?= isset($program_id) && $program_id == $row['id'] ? 'selected' : '' ?>><?= $row['name'] ?></option>
+                <?php endwhile; ?>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="course_id" class="control-label">Course</label>
+            <select name="course_id" id="course_id" class="form-control form-control-sm select2" required>
+                <option value="">Select Course</option>
+                <!-- Courses will be populated based on selected program -->
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="program_outcomes" class="control-label">Program Outcomes</label>
+            <select name="program_outcomes[]" id="program_outcomes" class="form-control form-control-sm select2" multiple="multiple" required>
+                <option value="">Select Program Outcomes</option>
+                <!-- Program outcomes will be populated based on selected program -->
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+</div>
+
+<script>
+    $(document).ready(function(){
+        $('#program_id').change(function(){
+            var program_id = $(this).val();
+            $('#course_id').html('<option value="">Select Course</option>');
+            $('#program_outcomes').html('<option value="">Select Program Outcomes</option>');
+            $.ajax({
+                url: _base_url_ + "classes/Master.php?f=get_courses_by_program",
+                method: 'POST',
+                data: { program_id: program_id },
+                dataType: 'json',
+                success: function(resp){
+                    if(resp.status == 'success'){
+                        var courses = resp.data;
+                        $.each(courses, function(index, course){
+                            $('#course_id').append('<option value="'+course.id+'">'+course.catalog_number+' - '+course.course_title+'</option>');
+                        });
+                    }else{
+                        alert_toast(resp.msg || "An error occurred", 'error');
+                    }
+                },
+                error: function(err){
+                    console.log(err);
+                    alert_toast("An error occurred", 'error');
+                }
+            });
+            $.ajax({
+                url: _base_url_ + "classes/Master.php?f=get_program_outcomes_by_program",
+                method: 'POST',
+                data: { program_id: program_id },
+                dataType: 'json',
+                success: function(resp){
+                    if(resp.status == 'success'){
+                        var outcomes = resp.data;
+                        $.each(outcomes, function(index, outcome){
+                            $('#program_outcomes').append('<option value="'+outcome.po_code+'">'+outcome.po_code+'</option>');
+                        });
+                    }else{
+                        alert_toast(resp.msg || "An error occurred", 'error');
+                    }
+                },
+                error: function(err){
+                    console.log(err);
+                    alert_toast("An error occurred", 'error');
+                }
+            });
+        });
+
+        $('#programOutcomesForm').submit(function (e) {
+            e.preventDefault();
+            var programOutcomes = [];
+
+            // Collect all selected outcomes
+            $('#program_outcomes option:selected').each(function () {
+                var po_code = $(this).val();
+                programOutcomes.push({
+                    po_code: po_code
+                });
+            });
+
+            var data = {
+                course_id: $('#course_id').val(),
+                program_outcomes: JSON.stringify(programOutcomes)
+            };
+
+            start_loader();
+            $.ajax({
+                url: _base_url_ + "classes/Master.php?f=save_program_outcome",
+                method: 'POST',
+                data: data,
+                dataType: 'json',
+                error: err => {
+                    console.log(err);
+                    alert_toast("An error occurred", 'error');
+                    end_loader();
+                },
+                success: function (resp) {
+                    if (resp.status === 'success') {
+                        alert_toast("Program outcomes saved successfully", 'success');
+                        location.reload();
+                    } else {
+                        alert_toast(resp.msg || "An error occurred", 'error');
+                    }
+                    end_loader();
+                }
+            });
+        });
+
+        // Initialize Select2 for program, course selection, and program outcomes
+        $('#program_id, #program_outcomes').select2({
+            placeholder: "Select",
+            allowClear: true
+        });
+
+        // Initialize Select2 for course selection with search functionality
+        $('#course_id').select2({
+            placeholder: "Select Course",
+            allowClear: true,
+            ajax: {
+                url: _base_url_ + "classes/Master.php?f=get_courses_by_program",
+                dataType: 'json',
+                delay: 250,
+                data: function (params) {
+                    return {
+                        program_id: $('#program_id').val(),
+                        search: params.term // search term
+                    };
+                },
+                processResults: function (data) {
+                    return {
+                        results: $.map(data.data, function (item) {
+                            return {
+                                id: item.id,
+                                text: item.catalog_number + ' - ' + item.course_title
+                            };
+                        })
+                    };
+                },
+                cache: true
+            }
+        });
+    });
+</script>

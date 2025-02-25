@@ -1,0 +1,226 @@
+Received Data: Array
+(
+    [course_id] => 113
+    [program_outcomes] => ["CS04","CS05"]
+)
+
+JSON Received: ["CS04","CS05"]
+Decoded Outcomes: Array
+(
+    [0] => CS04
+    [1] => CS05
+)
+
+Processing Outcome: CS04
+Received Data: Array
+(
+    [course_id] => 107
+    [program_outcomes] => ["CS03","CS07","CS08"]
+)
+
+JSON Received: ["CS03","CS07","CS08"]
+Received Data: Array
+(
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04","CS05","CS06"]
+)
+
+JSON Received: ["CS01","CS02","CS03","CS04","CS05","CS06"]
+Processing Outcome: CS01
+Received Data: Array
+(
+    [course_id] => 123
+    [program_outcomes] => ["CS03","CS05","CS06","CS07"]
+)
+
+JSON Received: ["CS03","CS05","CS06","CS07"]
+Processing Outcome: CS03
+Received Data: Array
+(
+    [course_id] => 123
+    [program_outcomes] => ["CS03","CS04"]
+)
+
+JSON Received: ["CS03","CS04"]
+Processing Outcome: CS03
+Received Data: Array
+(
+    [course_id] => 107
+    [program_outcomes] => ["CS02","CS03","CS04","CS05"]
+)
+
+JSON Received: ["CS02","CS03","CS04","CS05"]
+Processing Outcome: CS02
+Received Data: Array
+(
+    [course_id] => 15
+    [program_outcomes] => ["IT02","IT03","IT04"]
+)
+
+JSON Received: ["IT02","IT03","IT04"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Received Data: Array
+(
+    [course_id] => 106
+    [program_outcomes] => ["CS02","CS04"]
+)
+
+JSON Received: ["CS02","CS04"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Received Data: Array
+(
+    [course_id] => 110
+    [program_outcomes] => ["CS03","CS04","CS05"]
+)
+
+JSON Received: ["CS03","CS04","CS05"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Received Data: Array
+(
+    [course_id] => 26
+    [program_outcomes] => ["IT02","IT03","IT04"]
+)
+
+Received Data: Array
+(
+    [course_id] => 26
+    [program_outcomes] => ["IT02","IT03","IT04","IT05","IT06"]
+)
+
+Received Data: Array
+(
+    [course_id] => 111
+    [program_outcomes] => ["CS02","CS03","CS04"]
+)
+
+Received Data: Array
+(
+    [program_id] => 23
+    [course_id] => 33
+    [program_outcomes] => ["IT03","IT04","IT05"]
+)
+
+JSON Received: ["IT03","IT04","IT05"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Processing Outcome: IT03
+Processing Outcome: IT04
+Processing Outcome: IT05
+Received Data: Array
+(
+    [program_id] => 23
+    [course_id] => 27
+    [program_outcomes] => ["IT01","IT02","IT03","IT04","IT05","IT06","IT07","IT08","IT09","IT10","IT11","IT12","IT13","IT14","IT03","IT04","IT05"]
+)
+
+JSON Received: ["IT01","IT02","IT03","IT04","IT05","IT06","IT07","IT08","IT09","IT10","IT11","IT12","IT13","IT14","IT03","IT04","IT05"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Processing Outcome: IT01
+Processing Outcome: IT02
+Processing Outcome: IT03
+Processing Outcome: IT04
+Processing Outcome: IT05
+Processing Outcome: IT06
+Processing Outcome: IT07
+Processing Outcome: IT08
+Processing Outcome: IT09
+Processing Outcome: IT10
+Processing Outcome: IT11
+Processing Outcome: IT12
+Processing Outcome: IT13
+Processing Outcome: IT14
+Processing Outcome: IT03
+Processing Outcome: IT04
+Processing Outcome: IT05
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 123
+    [program_outcomes] => ["CS02","CS03"]
+)
+
+JSON Received: ["CS02","CS03"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Processing Outcome: CS02
+Processing Outcome: CS03
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04"]
+)
+
+JSON Received: ["CS01","CS02","CS03","CS04"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Processing Outcome: CS01
+Processing Outcome: CS02
+Processing Outcome: CS03
+Processing Outcome: CS04
+Received Data: Array
+(
+    [program_id] => 23
+    [course_id] => 15
+    [program_outcomes] => ["IT01","IT02","IT03"]
+)
+
+JSON Received: ["IT01","IT02","IT03"]
+Table Columns: po_id, program_id, po_code, description, performance_indicator, date_created, date_updated, graduate_attribute_id
+Processing Outcome: IT01
+Processing Outcome: IT02
+Processing Outcome: IT03
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04","CS05"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04","CS05"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03","CS04"]
+)
+
+Received Data: Array
+(
+    [program_id] => 24
+    [course_id] => 107
+    [program_outcomes] => ["CS01","CS02","CS03"]
+)
+
+JSON Received: ["CS01","CS02","CS03"]

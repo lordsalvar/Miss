@@ -1,0 +1,2 @@
+ALTER TABLE `course_enrollment`
+ADD COLUMN `edit` TINYINT(1) NOT NULL DEFAULT 0;
